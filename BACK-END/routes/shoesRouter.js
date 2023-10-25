@@ -6,7 +6,8 @@ import {
     oneShoe,
     deleteShoe,
     updateShoe,
-    addLike
+    likeShoe,
+    allShoeLike
 } from '../controllers/shoesController.js';
 
 const router = express.Router();
@@ -21,6 +22,8 @@ router.delete("/delete/:id", deleteShoe);
 
 router.put("/update/:id", updateShoe);
 
-router.post("/like/:id", addLike);
+router.post("/like/:id", likeShoe);
+
+router.get("/alllike", allShoeLike);
 
 export default router;

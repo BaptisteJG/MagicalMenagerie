@@ -71,21 +71,52 @@ export const updateShoe = async (req, res, next) => {
     }
 }
 
-// Ajouter un like
-export const addLike = async (req, res, next) => {
+// // Ajouter un like
+// export const addLike = async (req, res, next) => {
+//     const { id } = req.params;
+//     try {
+//         const shoe = await Model.findById(id);
+//         if (shoe) {
+//             // Incrémenter le nombre de likes de 1
+//             shoe.likes = shoe.likes + 1;
+//             await shoe.save();
+//             res.status(200).json({message: 'Like ajouté'});
+//         }
+//         else {
+//             res.status(404).json({message: 'Ressource non trouvée'});
+//         }
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
+// Ajout de like
+export const likeShoe = async (req, res, next) => {
     const { id } = req.params;
-    try {
+    try{
         const shoe = await Model.findById(id);
-        if (shoe) {
-            // Incrémenter le nombre de likes de 1
-            shoe.likes = shoe.likes + 1;
+        if(shoe) {
+            shoe.likes = shoe.likes +1;
             await shoe.save();
-            res.status(200).json({message: 'Like ajouté'});
+            res.status(200).json({
+                likes: shoe.likes,
+                message: 'Like ajouté'
+            })
         }
-        else {
-            res.status(404).json({message: 'Ressource non trouvée'});
-        }
-    } catch (error) {
-        next(error);
+        if(!shoe) res.status(404).json({message: 'Ressource non trouvé'})
     }
-};
+    catch(error){
+        next(error)
+    }
+}
+
+// Tri par like
+export const allShoeLike = async (req, res, next) => {
+    try{
+        const shoes = await Model.find().sort({like: -1})
+        res.status(200).json(shoes)
+    }
+    catch(error){
+        next(error)
+    }
+}
