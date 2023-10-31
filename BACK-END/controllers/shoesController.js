@@ -113,7 +113,7 @@ export const likeShoe = async (req, res, next) => {
 // Tri par like
 export const allShoeLike = async (req, res, next) => {
     try{
-        const shoes = await Model.find().sort({like: -1})
+        const shoes = await Model.find().sort({likes: -1})
         res.status(200).json(shoes)
     }
     catch(error){

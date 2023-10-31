@@ -6,6 +6,7 @@ import cors from 'cors';
 
 // ROUTES
 import shoesRoutes from './routes/shoesRouter.js';
+import authRoutes from './routes/authRouter.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cors());
 
 // ROUTER
 app.use("/api/shoes", shoesRoutes);
+app.use("/api/auth", authRoutes);
 
 // SERVER
 app.listen(PORT, () => {
